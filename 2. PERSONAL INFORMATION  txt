@@ -1,0 +1,131 @@
+#include<iostream>
+#include<string.h>
+#include<ctime>
+using namespace std;
+class person
+{
+private:
+char *name,*blood,*address;
+int dob;
+long int insurance,tel,license;
+float height,weight;
+static int count;
+public:
+person()
+{
+cout<<"-------------------Default memory-------------";
+name=new char[13];
+strcpy(name,"default name");
+blood=new char[3];
+strcpy(blood,"O+");
+address=new char[20];
+strcpy(address,"Nashik");
+insurance=123456;
+license=1234565;
+height=5.11;
+weight=70;
+dob=2004;
+display();
+}
+person(char n[],char b[],int yy,char add[],float w, long int in, long int tn,long int ln, float 
+h)
+{
+int len;
+len=strlen(n);
+name=new char [len+1];
+strcpy(name,n);
+len=strlen(b);
+blood=new char [len+1];
+strcpy(blood,b);
+len=strlen(add);
+address=new char [len+1];
+dob=yy;
+insurance=in;
+tel=tn;
+license=ln;
+height=h;
+weight=w;
+}
+void display()
+{
+cout<<"\n Person Name="<<name;
+cout<<"\n Blood Group="<<blood;
+cout<<"\n Date of Birth="<<dob;
+cout<<"\n Address="<<address;
+cout<<"\n Insurance number="<<insurance;
+cout<<"\n Telephone number="<<tel;
+cout<<"\n Lisence number="<<license;
+cout<<"\n Height="<<height;
+cout<<"\n Weight="<<weight<<endl;
+}
+static void displaycount()
+{
+cout<<"\nNumber of Entries Are:"<<endl;
+}
+~person()
+{
+cout<<"\ndestroctor called";
+}
+};
+int person::count=0;
+int main()
+{
+int ch;
+person *p[20];
+char pname[15],pblood[3],paddress[20];
+long int pinsurance,ptel,plicense;
+float pheight,pweight;
+int cnt=00,dd;
+do
+{
+cout<<"\n---------Menu-------";
+cout<<"\n1.Default Constructor";
+cout<<"\n2.Parametrized Constructor";
+cout<<"\n3.Number of Entries";
+cout<<"\n4.Display";
+cout<<"\n5.Exit";
+cout<<"\nENTER THE CHOICE:";
+cin>>ch;
+switch(ch)
+{
+case 1:
+p[cnt]=new person();
+cnt=cnt+1;
+break;
+case 2:
+cout<<"\nEnter the name of person:";
+cin>>pname;
+cout<<"\nEnter the blood group";
+cin>>pblood;
+cout<<"\nEnter the Date of Birth";
+cin>>dd;
+cout<<"\nEnter the Address";
+cin>>paddress;
+cout<<"\nEnter the Insurance Number";
+cin>>pinsurance;
+cout<<"\nEnter the Telephone Number";
+cin>>ptel;
+cout<<"\nEnter the License Number";
+cin>>plicense;
+cout<<"\nEnter the Height";
+cin>>pheight;
+cout<<"\nEnter the Weight";
+cin>>pweight;
+p[cnt]=new 
+person(pname,pblood,dd,paddress,pinsurance,ptel,plicense,pheight,pweight);
+cnt=cnt+1;
+break;
+case 3:
+person::displaycount();
+break;
+case 4:
+for(int i=0;i<cnt;i++)
+{
+p[i]->display();
+}
+break;
+case 5:
+return 0;
+}
+} while(ch!=4);
+}
